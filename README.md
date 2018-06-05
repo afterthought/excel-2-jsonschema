@@ -1,5 +1,5 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Dependency Status](https://dependencyci.com/github/excel-2-jsonschema/badge)](https://dependencyci.com/github/excel-2-jsonschema)
+[![Dependency Status](https://dependencyci.com/github/hugorper/excel-2-jsonschema/badge)](https://dependencyci.com/github/hugorper/excel-2-jsonschema)
 [![Build Status](https://travis-ci.org/hugorper/excel2jsonschema.svg?branch=master)](https://travis-ci.org/hugorper/excel2jsonschema)
 [![Coverage Status](https://coveralls.io/repos/github/hugorper/excel2jsonschema/badge.svg?branch=master)](https://coveralls.io/github/hugorper/excel2jsonschema?branch=master)
 # Generate JSON Schema files from Excel Sheet
