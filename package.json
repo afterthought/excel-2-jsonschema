@@ -1,12 +1,12 @@
 {
-  "name": "excel2jsonschema",
+  "name": "excel-2-jsonschema",
   "description": "Utility module which generates JSON Schema from Excel Spread sheet",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "license": "MIT",
-  "author": "pponugo",
+  "author": "hugorper",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pponugo/excel2jsonschema"
+    "url": "https://github.com/hugorper/excel-2-jsonschema"
   },
   "keywords": [
     "JSON",
