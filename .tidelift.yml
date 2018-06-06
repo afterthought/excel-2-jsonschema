@@ -1,4 +1,0 @@
-ci:
-  # make removed test a warning rather than an error, globally
-  tests:
-    removed: warn
