@@ -10,7 +10,7 @@ const assert = require('assert');
 const primitiveTypes = ['boolean', 'integer', 'number', 'string'];
 jsonfile.spaces = 4;
   // TODO: add validations
-export default (inputExcelFile, sheetName, outputDir, embedded) => {
+  module.exports = function (inputExcelFile, sheetName, outputDir, embedded)  {
   assert(inputExcelFile, 'Please provide Input Excel Sheet location');
   assert(sheetName, 'Please provide Sheet Name');
   assert(outputDir, 'Please provide Output dir location');
@@ -26,7 +26,7 @@ export default (inputExcelFile, sheetName, outputDir, embedded) => {
 
   modelInfo = _.chain(modelInfo)
     .mapValues((value, key) => ({
-      $schema: 'http://json-schema.org/draft-04/schema#',
+      $schema: 'http://json-schema.org/draft-07/schema#',
       title: key,
       description: key,
       type: 'object',

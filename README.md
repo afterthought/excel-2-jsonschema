@@ -1,49 +1,53 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Dependency Status](https://dependencyci.com/github/hugorper/excel-2-jsonschema/badge)](https://dependencyci.com/github/hugorper/excel-2-jsonschema) [![Build Status](https://travis-ci.org/hugorper/excel-2-jsonschema.svg?branch=master)](https://travis-ci.org/hugorper/excel-2-jsonschema)[![Coverage Status](https://coveralls.io/repos/github/hugorper/excel-2-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/hugorper/excel-2-jsonschema?branch=master)
-# Generate JSON Schema files from Excel Sheet
 
-## Background
-In Todays world, RESTful API's and **JSON** have become the format of choice for **APIs** and applications. Initillay, there was no common standard to describe the RESTful API's or request/response data strcutres on par with SOAP servcies (WSDL/XSD). To bring the same standards, [JSON Schema](http://json-schema.org/) came with specification and solved problem of describing RESTful API's clear, human- and machine-readable documentation.
+# A tool to generate JSON Schema files from Excel Sheet
 
-However, JSON Schema is **trickier** to work with for many people. Creating the JSON Schema files **manually** is **cumbersome** and **error prone**. On other hand, tables are just simpler for people to understand and organize. More importantly, Excel provides great tools manipulating and organizing the table structure data.
+## Why
 
-## What is excel2jsonschema CLI tool?
-The **excel2jsonschema** CLI tool, allows one to describe the JSON Schema in table format and the CLI tool generates JSON Schema files from table format (Excel Sheet).
-###Example
-####Input Excel
+ [JSON Schema](http://json-schema.org/) creation is difficult, especially for non-technical people. Excel is widely used and proves to be a good tool for defining schema
+
+## Excel-2-jsonschema CLI tool?
+
+The **excel-2-jsonschema** CLI tool, allows to generate [JSON Schema](http://json-schema.org/) from Excel Sheet table.
+
+## Excel Table (input)
+
 |Name|Property|Type|Description|
 |----|--------|----|------------|
-|Product|product_id|string|Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco| |will have a different product_id than uberX in Los Angeles.|
-|Product|description|string|Description of product.|
-|Product|display_name|string|Display name of product.|
-|Product|capacity|string|Capacity of product. For example, 4 people.|
-|Product|image|string|Image URL representing the product.|
-####Output JSON Schema
+|Hotel|Id|string|Hotel unique identifier.|
+|Hotel|description|string|Hotel description.|
+|Hotel|displayName|string|Display name of hotel.|
+|Hotel|capacity|string|Capacity of the hotel, ex: 44 people.|
+|Hotel|image|string|Image URL representing the hotel.|
+
+## JSON Schema (output)
+
 ```json
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "Product",
-    "description": "Product",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "hotel",
+    "description": "hotel",
     "type": "object",
     "properties": {
-        "product_id": {
-            "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
+        "id": {
+            "description": "Hotel unique identifier.",
             "type": "string"
         },
         "description": {
-            "description": "Description of product.",
+            "description": "Hotel description.",
             "type": "string"
         },
-        "display_name": {
-            "description": "Display name of product.",
+        "displayName": {
+            "description": "Display name of hotel.",
             "type": "string"
         },
         "capacity": {
-            "description": "Capacity of product. For example, 4 people.",
+            "description": "Capacity of the hotel, ex: 44 people.",
             "type": "string"
         },
         "image": {
-            "description": "Image URL representing the product.",
+            "description": "Image URL representing the hotel.",
             "type": "string"
         }
     },
@@ -51,15 +55,19 @@ The **excel2jsonschema** CLI tool, allows one to describe the JSON Schema in tab
 }
 ```
 
-## Install
-```npm install -g excel2jsonschema```
+## CLI Tool (global mode)
 
-## Usage
+### CLI install
+
+```npm install -g excel-2-jsonschema```
+
+### CLI Usage
+
 ```
 How to Execute:
-  excel2jsonschema -i ./sample.xls -s Schema -o ./dist
+  excel-2-jsonschema -i ./sample.xls -s Schema -o ./dist
 
-Usage: excel2jsonschema [options]
+Usage: excel-2-jsonschema [options]
   Options:
   -i, --inputExcelFile <inputExcelFile>  'File Localtion' which contains Schema definations
   -s, --sheetName <sheetName>            'Sheet Name' which contains Schema definations
@@ -67,6 +75,47 @@ Usage: excel2jsonschema [options]
   -e, --embedded <embedded>              'Embedded' If embedded Schema should be generated (default: false)
 
 ```
-## Examples
-* [sample.xlsx](https://github.com/pponugo/excel2jsonschema/blob/master/example/sample.xlsx)
-* [advanced-sample.xlsx](https://github.com/pponugo/excel2jsonschema/blob/master/example/advanced-sample.xlsx)
+
+## Developer 
+
+### Install
+
+```npm install excel-2-jsonschema --save-dev```
+
+### Usage
+
+Generate schemas.
+
+```js
+const generateJSONSchema = require('generate-json-schema');
+const path = require('path');
+
+var options = {
+    inputExcelFile: path.join(__dirname, 'example/sample.xlsx'),
+    outputDir: path.join(__dirname, 'dist'),
+    sheetName: 'Schema'  
+};
+
+
+generateJSONSchema(options.inputExcelFile, options.sheetName, options.outputDir);
+```
+
+Generate json example files.
+
+```js
+const generateJSONExample = require('./src/generate-json-example');
+const path = require('path');
+
+var options = {
+    inputExcelFile: path.join(__dirname, 'example/sample.xlsx'),
+    outputDir: path.join(__dirname, 'dist'),
+    sheetName: 'Schema'  
+};
+
+generateJSONExample(options.inputExcelFile, options.sheetName, options.outputDir);
+```
+
+## Excel sample files
+
+* [sample.xlsx](https://github.com/hugorper/excel-2-jsonschema/example/sample.xlsx)
+* [advanced-sample.xlsx](https://github.com/hugorper/excel-2-jsonschemaa/example/advanced-sample.xlsx)
