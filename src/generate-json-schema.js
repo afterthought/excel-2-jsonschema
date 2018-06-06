@@ -10,10 +10,11 @@ const assert = require('assert');
 const primitiveTypes = ['boolean', 'integer', 'number', 'string'];
 jsonfile.spaces = 4;
   // TODO: add validations
-  module.exports = function (inputExcelFile, sheetName, outputDir, embedded)  {
+  module.exports = function (inputExcelFile, sheetName, outputDir, embedded, versionSchema)  {
   assert(inputExcelFile, 'Please provide Input Excel Sheet location');
   assert(sheetName, 'Please provide Sheet Name');
   assert(outputDir, 'Please provide Output dir location');
+  assert(versionSchema, 'Please provide Json-Schema version');
 
   console.log(`Generating json schema from ${inputExcelFile} to ${outputDir}`);
   const workbook = XLSX.readFile(inputExcelFile);
@@ -26,7 +27,7 @@ jsonfile.spaces = 4;
 
   modelInfo = _.chain(modelInfo)
     .mapValues((value, key) => ({
-      $schema: 'http://json-schema.org/draft-07/schema#',
+      $schema: versionSchema,
       title: key,
       description: key,
       type: 'object',

@@ -64,8 +64,8 @@ The **excel-2-jsonschema** CLI tool, allows to generate [JSON Schema](http://jso
 ### CLI Usage
 
 ```
-How to Execute:
-  excel-2-jsonschema -i ./sample.xls -s Schema -o ./dist
+How to Execute (with default args -e -v):
+  excel-2-jsonschema -i ./sample.xls -s Schema -o ./dist 
 
 Usage: excel-2-jsonschema [options]
   Options:
@@ -73,7 +73,7 @@ Usage: excel-2-jsonschema [options]
   -s, --sheetName <sheetName>            'Sheet Name' which contains Schema definations
   -o, --outputDir <outputDir>            'Output Directory' where JSON Schema files should be generated## Install
   -e, --embedded <embedded>              'Embedded' If embedded Schema should be generated (default: false)
-
+  -v, --versionSchema <versionSchema>'    Contains Schema version (default: http://json-schema.org/draft-07/schema#)
 ```
 
 ## Developer 
@@ -93,11 +93,13 @@ const path = require('path');
 var options = {
     inputExcelFile: path.join(__dirname, 'example/sample.xlsx'),
     outputDir: path.join(__dirname, 'dist'),
-    sheetName: 'Schema'  
+    sheetName: 'Schema',
+    embedded: false,
+    versionSchema: 'http://json-schema.org/draft-07/schema#'  
 };
 
 
-generateJSONSchema(options.inputExcelFile, options.sheetName, options.outputDir);
+generateJSONSchema(options.inputExcelFile, options.sheetName, options.outputDir, options.embedded, options.versionSchema);
 ```
 
 Generate json example files.

@@ -5,17 +5,18 @@ var runSequence = require('run-sequence');
 var del = require('del');
 var jsonminify = require('gulp-jsonminify');
 var prettify = require('gulp-jsbeautifier');
-var generateJSONSchema = require('./src/generate-json-schema');
-var generateJSONExample = require('./src/generate-json-example');
+var generateJSONSchema = require('./src/generate-json-schema.js');
+var generateJSONExample = require('./src/generate-json-example.js');
 var minimist = require('minimist');
 var assert = require('assert');
 
 var knownOptions = {
-  string: ['inputExcelFile', 'sheetName', 'outputDir'],
+  string: ['inputExcelFile', 'sheetName', 'outputDir', 'versionSchema'],
   default: {
     inputExcelFile: 'example/sample.xlsx',
     sheetName: 'Schema',
-    outputDir: 'dist'
+    outputDir: 'dist',
+    versionSchema: 'http://json-schema.org/draft-07/schema#'
   }
 };
 
@@ -33,42 +34,24 @@ gulp.task('clean', function () {
   return del(args.outputDir)
 })
 
-gulp.task('readme', function (done) {
-  var options = {
-      inputExcelFile: 'example/sample.xlsx',
-      sheetName: 'Schema',
-      outputDir: 'dist'
-  };  
-  jsonLogPrettify("Output information", options);
+gulp.task('schema', function (done) {
+  jsonLogPrettify("Output schema information", args);
   assert(args.inputExcelFile, 'Please provide Input Excel Sheet location');
   assert(args.sheetName, 'Please provide Sheet Name');
   assert(args.outputDir, 'Please provide Output dir location');
-  generateJSONSchema(path.join(__dirname, options.inputExcelFile), options.sheetName, path.join(__dirname, options.outputDir));
+  assert(args.versionSchema, 'Please provide Json-Schema version');
+  generateJSONSchema(path.join(__dirname, args.inputExcelFile), args.sheetName, path.join(__dirname, args.outputDir), false, args.versionSchema);
   done();
 });
 
-
-gulp.task('generate-json-schema', function (done) {
-  jsonLogPrettify("Output information", args);
-  assert(args.inputExcelFile, 'Please provide Input Excel Sheet location');
-  assert(args.sheetName, 'Please provide Sheet Name');
-  assert(args.outputDir, 'Please provide Output dir location');
-  generateJSONSchema(path.join(__dirname, args.inputExcelFile), args.sheetName, path.join(__dirname, args.outputDir));
-  done();
-});
-
-gulp.task('generate-json-example', function (done) {
-  jsonLogPrettify("Output information", args);
+gulp.task('example', function (done) {
+  jsonLogPrettify("Output json  information", args);
   assert(args.inputExcelFile, 'Please provide Input Excel Sheet location');
   assert(args.sheetName, 'Please provide Sheet Name');
   assert(args.outputDir, 'Please provide Output dir location');
   generateJSONExample(path.join(__dirname, args.inputExcelFile), args.sheetName, path.join(__dirname, args.outputDir));
   done();
 });
-
-
-
-
 
 gulp.task('lint', function () {
   var combined = combiner.obj([
