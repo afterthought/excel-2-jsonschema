@@ -129,5 +129,5 @@ For more informations about npm run-script, go to _scripts_ of file _package.jso
 
 ## Excel sample files
 
-* [sample.xlsx](https://github.com/hugorper/excel-2-jsonschema/example/sample.xlsx)
-* [advanced-sample.xlsx](https://github.com/hugorper/excel-2-jsonschemaa/example/advanced-sample.xlsx)
+* [sample.xlsx](https://github.com/hugorper/excel-2-jsonschema/tree/master/example/sample.xlsx)
+* [advanced-sample.xlsx](https://github.com/hugorper/excel-2-jsonschema/tree/master/example/advanced-sample.xlsx)
