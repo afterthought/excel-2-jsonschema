@@ -1,0 +1,7 @@
+ci:
+  # don't run outdated test on any dependencies called rails from Rubygems
+  platform:
+    Rubygems:
+      rails:
+        tests:
+          outdated: skip
