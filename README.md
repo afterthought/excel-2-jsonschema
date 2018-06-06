@@ -59,7 +59,7 @@ The **excel-2-jsonschema** CLI tool, allows to generate [JSON Schema](http://jso
 
 ### CLI install
 
-```npm install -g @hugorper/excel-2-jsonschema```
+```npm install -g hugorper/excel-2-jsonschema```
 
 ### CLI Usage
 
@@ -80,7 +80,7 @@ Usage: excel-2-jsonschema [options]
 
 ### Install
 
-```npm install @hugorper/excel-2-jsonschema --save-dev```
+```npm install hugorper/excel-2-jsonschema --save-dev```
 
 ### Usage
 
