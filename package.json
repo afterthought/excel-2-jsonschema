@@ -1,7 +1,7 @@
 {
   "name": "@hugorper/excel-2-jsonschema",
   "description": "Utility module which generates JSON Schema from Excel Spread sheet",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "license": "MIT",
   "author": "hugorper",
   "repository": {
