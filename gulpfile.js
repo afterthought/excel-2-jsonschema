@@ -9,6 +9,8 @@ var generateJSONSchema = require('./src/generate-json-schema.js');
 var generateJSONExample = require('./src/generate-json-example.js');
 var minimist = require('minimist');
 var assert = require('assert');
+var exec   =  require('child_process').exec;
+
 
 var knownOptions = {
   string: ['inputExcelFile', 'sheetName', 'outputDir', 'versionSchema'],
@@ -31,7 +33,8 @@ var jsonLogPrettify = function(text, obj) {
 var args = minimist(process.argv.slice(2), knownOptions)
 
 gulp.task('clean', function () {
-  return del(args.outputDir)
+  del('./lib');
+  return del('./dist');
 })
 
 gulp.task('schema', function (done) {
@@ -50,6 +53,34 @@ gulp.task('example', function (done) {
   assert(args.sheetName, 'Please provide Sheet Name');
   assert(args.outputDir, 'Please provide Output dir location');
   generateJSONExample(path.join(__dirname, args.inputExcelFile), args.sheetName, path.join(__dirname, args.outputDir));
+  done();
+});
+
+gulp.task('test', function(done) {
+  var shellCommand = exec('npm run-script test');
+  
+  shellCommand.stdout.pipe(process.stdout);
+  done();
+});
+
+gulp.task('build', function(done) {
+  var shellCommand = exec('npm run-script build');
+  
+  shellCommand.stdout.pipe(process.stdout);
+  done();
+});
+
+gulp.task('version', function(done) {
+  var shellCommand = exec('npm run-script version');
+  
+  shellCommand.stdout.pipe(process.stdout);
+  done();
+});
+
+gulp.task('x', function(done) {
+  var shellCommand = exec('npm run-script x');
+  
+  shellCommand.stdout.pipe(process.stdout);
   done();
 });
 

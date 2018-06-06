@@ -117,6 +117,16 @@ var options = {
 generateJSONExample(options.inputExcelFile, options.sheetName, options.outputDir);
 ```
 
+## List Gulp Tasks 
+
+* clean: clean all output files
+* schema: Use generate json
+* example: Run example json output
+* build: Build project
+* lint: execute lint
+
+For more informations about npm run-script, go to _scripts_ of file _package.json_.
+
 ## Excel sample files
 
 * [sample.xlsx](https://github.com/hugorper/excel-2-jsonschema/example/sample.xlsx)
