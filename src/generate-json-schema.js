@@ -51,12 +51,21 @@ function processProperties(value, modelInfo, embedded) {
       if (embedded && _.lowerCase(value2[0].ParentType) === 'object') {
         return processChildProperties(value2, modelInfo, embedded);
       }
+      const propertyType = value2[0].ParentType ? (_.lowerCase(value2[0].ParentType) === 'array') ? 'array' : undefined : value2[0].Type;
+      const enumValuesRaw = value2[0].EnumList ? _.chain(value2[0].EnumList).trim('[').trimEnd(']').split(/\s*,\s*/).value() : undefined;
+      const enumValues = enumValuesRaw.map((raw) => {
+        if (propertyType === 'number') {
+          return Number(raw);
+        }
+
+        return raw;
+      });
       return {
         description: value2[0].Description,
-        type: value2[0].ParentType ? (_.lowerCase(value2[0].ParentType) === 'array') ? 'array' : undefined : value2[0].Type,
+        type: propertyType,
         items: processArrayItems(value2[0], modelInfo, embedded),
         $ref: (!embedded && _.lowerCase(value2[0].ParentType) === 'object') ? `${_.kebabCase(value2[0].Type)}.json#` : undefined,
-        enum: value2[0].EnumList ? _.chain(value2[0].EnumList).trim('[').trimEnd(']').split(/\s*,\s*/).value() : undefined,
+        enum: enumValues,
         enumNames: value2[0].EnumNames ? _.chain(value2[0].EnumNames).trim('[').trimEnd(']').split(/\s*,\s*/).value() : undefined,
         default: value2[0].Default,
         title: value2[0].Title,
