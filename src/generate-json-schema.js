@@ -28,6 +28,7 @@ jsonfile.spaces = 4;
   modelInfo = _.chain(modelInfo)
     .mapValues((value, key) => ({
       $schema: versionSchema,
+      $id: `https://lime-energy.io/schemas/${_kebabCase(key)}.json`,
       title: key,
       description: key,
       type: 'object',
