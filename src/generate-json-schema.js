@@ -53,7 +53,7 @@ function processProperties(value, modelInfo, embedded) {
       }
       const propertyType = value2[0].ParentType ? (_.lowerCase(value2[0].ParentType) === 'array') ? 'array' : undefined : value2[0].Type;
       const enumValuesRaw = value2[0].EnumList ? _.chain(value2[0].EnumList).trim('[').trimEnd(']').split(/\s*,\s*/).value() : undefined;
-      const enumValues = enumValuesRaw.map((raw) => {
+      const enumValues = enumValuesRaw === undefined ? undefined : enumValuesRaw.map((raw) => {
         if (propertyType === 'number') {
           return Number(raw);
         }
