@@ -60,8 +60,7 @@ function processProperties(value, modelInfo, embedded) {
 
         return raw;
       });
-
-      const property = {
+      return {
         description: value2[0].Description,
         type: propertyType,
         items: processArrayItems(value2[0], modelInfo, embedded),
@@ -79,16 +78,6 @@ function processProperties(value, modelInfo, embedded) {
         maxItems: value2[0].MaxItems,
         minItems: value2[0].MinItems,
       };
-      // Remove type allowing
-      const isNullable = value2[0].Required === undefined || value2[0].Required === 'false';
-      if (isNullable && enumValues !== undefined) {
-        delete property.type;
-        property.enum.push(null);
-        if (property.enumNames !== undefined) {
-          property.enumNames.push(null);
-        }
-      }
-      return property;
     })
     .value();
   return _.isEmpty(properties) ? undefined : properties;
