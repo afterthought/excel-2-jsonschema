@@ -58,6 +58,10 @@ function processProperties(value, modelInfo, embedded) {
           return Number(raw);
         }
 
+        if (propertyType === 'boolean') {
+          return Boolean(raw);
+        }
+
         return raw;
       });
       return {
